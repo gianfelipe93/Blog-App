@@ -16,9 +16,15 @@ class PostsNew extends Component {
         )
     }
 
+    onSubmit(values) {
+        console.log(values)
+    }
+
     render(){
+        const { handleSubmit } = this.props
+
         return (
-            <form>
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <Field 
                     label="Title For Post" 
                     name="title" 
@@ -34,6 +40,8 @@ class PostsNew extends Component {
                     name="content" 
                     component={this.renderField} 
                 />
+
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         )
     }
@@ -43,13 +51,13 @@ function validate(values) {
     const errors = {}
 
     if(!values.title) {
-        errors.title = "Enter a title that is at least 3 characters!"
+        errors.title = "Enter a title"
     }
-    if(!values.title) {
-        errors.title = "Enter some categories"
+    if(!values.categories) {
+        errors.categories = "Enter some categories"
     }
-    if(!values.title) {
-        errors.title = "Enter some content please"
+    if(!values.content) {
+        errors.content = "Enter some content please"
     }
 
     return errors
